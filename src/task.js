@@ -27,25 +27,10 @@ export default class Task {
 		return this.checked
 	}
 
-	get getPriority() {
-		let priorityClass = ""
-		switch (this.priority) {
-			case 0:
-				priorityClass = "no"
-				break
-			case 1:
-				priorityClass = "low"
-				break
-			case 2:
-				priorityClass = "medium"
-				break
-			case 3:
-				priorityClass = "high"
-				break
-			case 4:
-				priorityClass = "urgent"
-				break
-		}
-		return priorityClass + "-priority"
+	/**
+	 * @param {number} priority
+	 */
+	set setPriority(priority) {
+		this.priority = priority
 	}
 }
