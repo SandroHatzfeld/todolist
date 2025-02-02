@@ -45,27 +45,7 @@ document.querySelector('#app').innerHTML = `
     <div id="container">
       <h1><span class="project-icon">${currentProject.icon}</span>${currentProject.title}</h1>
       <p>${currentProject.description}</p>
-      <div id="priority-sorting">
-        ${currentProject.getPriorities.map(priority => {
-          return `
-            <div class="priority" style="background-color:${priority.color}"><h2>${priority.name}</h2><hr>
-              <div class="priority-items">
-                ${currentProject.getTasks.filter((task) => task.priority === priority).map(task => {
-                  return `
-                    <div class="task">
-                      <div class="checkbox ${task.checked ? "checked" : ""}"></div>
-                      <div>
-                        <span class="task-title">${task.title}</span><br>
-                        ${task.dueDate ? `<span class='due-date'>${task.dueDate}</span>` : ""}
-                      </div>
-                    </div>
-                  `
-                }).join("")}
-              </div>
-            </div>
-          `
-        }).join("")}
-      </div>
+      ${currentProject.renderProjectPrioritySorted()}
     </div>
   </main>
 `

@@ -20,9 +20,7 @@ export default class Project {
 		return this.#tasks
 	}
 
-
 	#priorites = []
-
 
 	addPriorities(name, color) {
 		this.#priorites.push({
@@ -33,5 +31,23 @@ export default class Project {
 
 	get getPriorities() {
 		return this.#priorites
+	}
+
+	renderProjectPrioritySorted() {
+		return `
+			<div id="priority-sorting">
+        ${this.#priorites.map(priority => {
+          return `
+            <div class="priority" style="background-color:${priority.color}"><h2>${priority.name}</h2><hr>
+              <div class="priority-items">
+                ${this.#tasks.filter((task) => task.priority === priority).map(task => {
+                  return task.renderTaskItem()
+                }).join("")}
+              </div>
+            </div>
+          `
+        }).join("")}
+      </div>
+		`
 	}
 }

@@ -34,4 +34,15 @@ export default class Task {
 		this.priority = priority
 	}
 
+	renderTaskItem() {	
+		return `
+			<div class="task">
+				<div class="checkbox ${this.checked ? "checked" : ""}"></div>
+				<div>
+					<span class="task-title">${this.title}</span><br>
+					${this.dueDate ? `<span class='due-date'>${this.dueDate}</span>` : ""}
+				</div>
+			</div>
+		`
+	}
 }
