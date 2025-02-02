@@ -12,10 +12,15 @@ project1.addPriorities("Medium", "#cdcd49")
 project1.addPriorities("Soon", "#3db63d")
 project1.addPriorities("None", "#d4d4d4")
 
+project2.addPriorities("Soon", "#3db63d")
+project2.addPriorities("None", "#d4d4d4")
+
 const task1 = new Task("First Task", "Finish this project", project1.getPriorities[ 0 ])
 const task2 = new Task("Second Task", "Finish this project", project1.getPriorities[ 1 ])
 const task3 = new Task("Useless Task", "Finish this project", project1.getPriorities[ 2 ])
 const task4 = new Task("fourth Task", "Finish this project", project1.getPriorities[ 2 ])
+
+const task5 = new Task("fourth Task", "Finish this project", project2.getPriorities[ 1 ])
 
 task2.setState = true
 task3.dueDate = new Date(2025, 2, 21).toLocaleString()
@@ -25,27 +30,21 @@ project1.addTask = task2
 project1.addTask = task3
 project1.addTask = task4
 
+project2.addTask = task5
 projectsList.addProject = project1
 projectsList.addProject = project2
-
-let currentProject = projectsList.getProjects[ 0 ]
-
-
 
 
 document.querySelector('#app').innerHTML = `
   <aside>
-   <div id="project-list">
-    ${projectsList.getProjects.map((project) => {
-      return `<span class="project-item">${project.title}</span>`
-    }).join("")}
-   </div>
+    <div id="project-list">
+      ${projectsList.renderProjectsList()}
+      ${projectsList.attachProjectClickListener()}
+    </div>
   </aside>
   <main>
     <div id="container">
-      <h1><span class="project-icon">${currentProject.icon}</span>${currentProject.title}</h1>
-      <p>${currentProject.description}</p>
-      ${currentProject.renderProjectPrioritySorted()}
+      ${projectsList.renderCurrentProject()}
     </div>
   </main>
 `
