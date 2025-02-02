@@ -34,12 +34,10 @@ project2.addTask = task5
 projectsList.addProject = project1
 projectsList.addProject = project2
 
-
 document.querySelector('#app').innerHTML = `
   <aside>
     <div id="project-list">
       ${projectsList.renderProjectsList()}
-      ${projectsList.attachProjectClickListener()}
     </div>
   </aside>
   <main>
@@ -48,3 +46,5 @@ document.querySelector('#app').innerHTML = `
     </div>
   </main>
 `
+
+projectsList.attachProjectClickListener()

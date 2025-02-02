@@ -44,6 +44,9 @@ aside {
   gap: 0.25rem;
 }
 
+.project-item {
+  cursor: pointer;
+}
 main {
   padding: 2rem;
   margin-left: var(--sidebar-width);

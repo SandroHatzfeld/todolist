@@ -23,8 +23,6 @@ export default class ProjectList {
 		const projectItems = document.querySelectorAll(".project-item")
 		projectItems.forEach(item => {
 			item.addEventListener("click", (e) => {
-				console.log(e);
-				
 				this.setCurrentProject = parseInt(e.target.dataset.projectIndex)
 
 				const container = document.querySelector("#container")
