@@ -33,4 +33,5 @@ export default class Task {
 	set setPriority(priority) {
 		this.priority = priority
 	}
+
 }

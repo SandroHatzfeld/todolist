@@ -7,15 +7,18 @@ const projectsList = new ProjectList
 const project1 = new Project("Testproject", "This is my first project", "😊")
 const project2 = new Project("Second Project", "This is my second project", "❤️")
 
-project1.addPriorities("Urgend", "red")
-project1.addPriorities("Medium", "yellow")
-project1.addPriorities("Soon", "green")
-project1.addPriorities("None", "gray")
+project1.addPriorities("Urgend", "#b74141")
+project1.addPriorities("Medium", "#cdcd49")
+project1.addPriorities("Soon", "#3db63d")
+project1.addPriorities("None", "#d4d4d4")
 
 const task1 = new Task("First Task", "Finish this project", project1.getPriorities[ 0 ])
 const task2 = new Task("Second Task", "Finish this project", project1.getPriorities[ 1 ])
 const task3 = new Task("Useless Task", "Finish this project", project1.getPriorities[ 2 ])
 const task4 = new Task("fourth Task", "Finish this project", project1.getPriorities[ 2 ])
+
+task2.setState = true
+task3.dueDate = new Date(2025, 2, 21).toLocaleString()
 
 project1.addTask = task1
 project1.addTask = task2
@@ -45,14 +48,16 @@ document.querySelector('#app').innerHTML = `
       <div id="priority-sorting">
         ${currentProject.getPriorities.map(priority => {
           return `
-            <div class="priority" data-color="${priority.color}"><h2>${priority.name}</h2>
+            <div class="priority" style="background-color:${priority.color}"><h2>${priority.name}</h2><hr>
               <div class="priority-items">
                 ${currentProject.getTasks.filter((task) => task.priority === priority).map(task => {
                   return `
-                    <div class="task ${task.getPriority}">
-                      ${task.checked ? "<div class='checkbox'></div>" : ""}
-                      <p class="task-title">${task.title}</p>
-                      ${task.dueDate ? "<p class='due-date'></p>" : ""}
+                    <div class="task">
+                      <div class="checkbox ${task.checked ? "checked" : ""}"></div>
+                      <div>
+                        <span class="task-title">${task.title}</span><br>
+                        ${task.dueDate ? `<span class='due-date'>${task.dueDate}</span>` : ""}
+                      </div>
                     </div>
                   `
                 }).join("")}
