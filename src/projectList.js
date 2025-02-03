@@ -8,17 +8,31 @@ export default class ProjectList {
 	set addProject(project) {
 		this.#projects.push(project)
 	}
-	
+
 	get getProjects() {
 		return this.#projects
 	}
 
 	renderProjectsList() {
-		return this.#projects.map((project, index) => {
-      return `<span class="project-item" data-project-index="${index}">${project.title}</span>`
-    }).join("")
+		const projectItemsListEl = document.createElement("div")
+		projectItemsListEl.id = "project-list"
+
+		this.#projects.forEach((project, index) => {
+			const projectItemEl = document.createElement("span")
+			projectItemEl.classList.add("project-item")
+			projectItemEl.dataset.projectIndex = index
+			projectItemEl.innerHTML = project.title
+			projectItemsListEl.appendChild(projectItemEl)
+
+		})
+
+		return projectItemsListEl
+
+		// return this.#projects.map((project, index) => {
+		//   return `<span class="project-item" data-project-index="${index}">${project.title}</span>`
+		// }).join("")
 	}
-	
+
 	attachProjectClickListener() {
 		const projectItems = document.querySelectorAll(".project-item")
 		projectItems.forEach(item => {
@@ -41,13 +55,25 @@ export default class ProjectList {
 	}
 
 	renderCurrentProject() {
-		const currentProject = this.#projects[this.#currentProjectIndex]
-		return `
-			<h1><span class="project-icon">${currentProject.icon}</span>${currentProject.title}</h1>
-			<p>${currentProject.description}</p>
-			${currentProject.renderProjectPrioritySorted()}
-		`
-	}
+		const currentProject = this.#projects[ this.#currentProjectIndex ]
 
-	
+		const containerEl = document.createElement("div")
+		containerEl.id = "container"
+
+		// const projectIconEl = document.createElement("span")
+		// projectIconEl.classList.add("project-icon")
+		// projectIconEl.innerHTML =  currentProject.icon
+
+		const projectHeadlineEl = document.createElement("h1")
+		projectHeadlineEl.innerHTML = "<span class='project-icon'>" + currentProject.icon + "</span>" + currentProject.title
+
+		const projectDescriptionEl = document.createElement("p")
+		projectDescriptionEl.innerHTML = currentProject.description
+
+		containerEl.appendChild(projectHeadlineEl)
+		containerEl.appendChild(projectDescriptionEl)
+		containerEl.appendChild(currentProject.renderProjectPrioritySorted())
+
+		return containerEl
+	}
 }

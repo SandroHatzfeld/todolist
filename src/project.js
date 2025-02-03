@@ -34,20 +34,31 @@ export default class Project {
 	}
 
 	renderProjectPrioritySorted() {
-		return `
-			<div id="priority-sorting">
-        ${this.#priorites.map(priority => {
-          return `
-            <div class="priority" style="background-color:${priority.color}"><h2>${priority.name}</h2><hr>
-              <div class="priority-items">
-                ${this.#tasks.filter((task) => task.priority === priority).map(task => {
-                  return task.renderTaskItem()
-                }).join("")}
-              </div>
-            </div>
-          `
-        }).join("")}
-      </div>
-		`
+		const prioritySortingEl = document.createElement("div")
+		prioritySortingEl.id = "priority-sorting"
+
+		this.#priorites.forEach(priority => {
+			const priorityColumnEl = document.createElement("div")
+			priorityColumnEl.classList.add("priority")
+			priorityColumnEl.style.backgroundColor = priority.color
+
+			const priorityHeadlineEl = document.createElement("h2")
+			priorityHeadlineEl.innerHTML = priority.name
+
+			const priorityItemsEl = document.createElement("div")
+			priorityItemsEl.classList.add("priority-items")
+
+			const taskInPriorityEl = this.#tasks.filter((task) => task.priority === priority)
+			taskInPriorityEl.forEach((task, index) => {
+				const taskEl = task.renderTaskItem(index)
+				priorityItemsEl.appendChild(taskEl)
+			})
+			
+			priorityColumnEl.appendChild(priorityHeadlineEl)
+			priorityColumnEl.appendChild(priorityItemsEl)
+			prioritySortingEl.appendChild(priorityColumnEl)
+		})
+
+		return prioritySortingEl
 	}
 }

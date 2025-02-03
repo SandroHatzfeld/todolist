@@ -34,16 +34,47 @@ export default class Task {
 		this.priority = priority
 	}
 
-	renderTaskItem() {	
-		return `
-			<div class="task">
-				<div class="checkbox ${this.checked ? "checked" : ""}"></div>
-				<div>
-					<span class="task-title">${this.title}</span><br>
-					${this.dueDate ? `<span class='due-date'>${this.dueDate}</span>` : ""}
-				</div>
-			</div>
-		`
+	renderTaskItem(index) {	
+		const taskEl = document.createElement("div")
+		taskEl.classList.add("task")
+		taskEl.dataset.index = index
+
+		const checkboxEl = document.createElement("div")
+		checkboxEl.classList.add("checkbox")
+		if(this.checked) checkboxEl.classList.add("checked")
+		
+
+		const textwrapperEl = document.createElement("div")
+		const titleEl = document.createElement("span")
+		titleEl.classList.add("task-title")
+		titleEl.innerHTML = this.title
+		textwrapperEl.appendChild(titleEl)
+		
+		if(this.dueDate) {
+			const dueDateEl = document.createElement("span")
+			dueDateEl.classList.add("due-date")
+			dueDateEl.innerHTML = this.dueDate
+			textwrapperEl.appendChild(dueDateEl)
+		}
+
+		taskEl.appendChild(checkboxEl)
+		taskEl.appendChild(textwrapperEl)
+		
+		return taskEl
 	}
 
+	attachTaskClickListener() {
+		const tasks = document.querySelectorAll(".task")
+		tasks.forEach(task => {
+			const checkbox = task.querySelector(".checkbox")
+
+			checkbox.addEventListener("click", (e) => {
+				this.setState = !this.getState
+			})
+
+			task.addEventListener("click", (e) => {
+
+			})
+		})
+	}
 }
