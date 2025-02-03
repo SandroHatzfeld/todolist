@@ -73,8 +73,9 @@ main {
   min-width: 300px;
   border-radius: 0.25rem;
 }
-.priority hr {
-  border: 1px var(--font-color) solid;
+.priority h2 {
+  margin-bottom: 1rem;
+  border-bottom: 1px var(--font-color) solid;
 }
 .priority-items {
   display: grid;

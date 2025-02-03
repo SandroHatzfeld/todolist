@@ -35,10 +35,9 @@ export default class Task {
 	}
 
 	// create a task item
-	renderTaskItem(index) {
+	renderTaskItem() {
 		const taskEl = document.createElement("div")
 		taskEl.classList.add("task")
-		taskEl.dataset.index = index
 		// eventlistener for opening the item in a separate view
 		taskEl.addEventListener("click", (e) => {
 
@@ -53,6 +52,8 @@ export default class Task {
 		checkboxEl.addEventListener("click", (e) => {
 			e.stopPropagation()
 			this.checked = !this.checked
+			
+			checkboxEl.classList.toggle("checked")
 		})
 
 
@@ -66,6 +67,8 @@ export default class Task {
 			const dueDateEl = document.createElement("span")
 			dueDateEl.classList.add("due-date")
 			dueDateEl.innerHTML = this.dueDate
+			const breakEl = document.createElement("br")
+			textwrapperEl.appendChild(breakEl)
 			textwrapperEl.appendChild(dueDateEl)
 		}
 

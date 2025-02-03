@@ -30,7 +30,10 @@ export default class ProjectList {
 			const projectItemEl = document.createElement("span")
 			projectItemEl.classList.add("project-item")
 			projectItemEl.addEventListener("click", (e) => {
-				this.setCurrentProject = parseInt(e.target.dataset.projectIndex)			
+				this.setCurrentProject = parseInt(e.target.dataset.projectIndex)
+				const mainEl = document.querySelector('main')
+				mainEl.innerHTML = ''
+				mainEl.appendChild(this.renderCurrentProject())
 			})
 			projectItemEl.dataset.projectIndex = index
 			projectItemEl.innerHTML = project.title

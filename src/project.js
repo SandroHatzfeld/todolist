@@ -49,8 +49,8 @@ export default class Project {
 			priorityItemsEl.classList.add("priority-items")
 
 			const taskInPriorityEl = this.#tasks.filter((task) => task.priority === priority)
-			taskInPriorityEl.forEach((task, index) => {
-				const taskEl = task.renderTaskItem(index)
+			taskInPriorityEl.forEach((task) => {
+				const taskEl = task.renderTaskItem()
 				priorityItemsEl.appendChild(taskEl)
 			})
 			
