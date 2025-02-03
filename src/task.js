@@ -34,23 +34,35 @@ export default class Task {
 		this.priority = priority
 	}
 
-	renderTaskItem(index) {	
+	// create a task item
+	renderTaskItem(index) {
 		const taskEl = document.createElement("div")
 		taskEl.classList.add("task")
 		taskEl.dataset.index = index
+		// eventlistener for opening the item in a separate view
+		taskEl.addEventListener("click", (e) => {
+
+
+		})
 
 		const checkboxEl = document.createElement("div")
 		checkboxEl.classList.add("checkbox")
-		if(this.checked) checkboxEl.classList.add("checked")
+		if (this.checked) { checkboxEl.classList.add("checked") }
 		
+		// eventlisterener to toggle the state
+		checkboxEl.addEventListener("click", (e) => {
+			e.stopPropagation()
+			this.checked = !this.checked
+		})
+
 
 		const textwrapperEl = document.createElement("div")
 		const titleEl = document.createElement("span")
 		titleEl.classList.add("task-title")
 		titleEl.innerHTML = this.title
 		textwrapperEl.appendChild(titleEl)
-		
-		if(this.dueDate) {
+
+		if (this.dueDate) {
 			const dueDateEl = document.createElement("span")
 			dueDateEl.classList.add("due-date")
 			dueDateEl.innerHTML = this.dueDate
@@ -59,22 +71,7 @@ export default class Task {
 
 		taskEl.appendChild(checkboxEl)
 		taskEl.appendChild(textwrapperEl)
-		
+
 		return taskEl
-	}
-
-	attachTaskClickListener() {
-		const tasks = document.querySelectorAll(".task")
-		tasks.forEach(task => {
-			const checkbox = task.querySelector(".checkbox")
-
-			checkbox.addEventListener("click", (e) => {
-				this.setState = !this.getState
-			})
-
-			task.addEventListener("click", (e) => {
-
-			})
-		})
 	}
 }
