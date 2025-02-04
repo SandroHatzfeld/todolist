@@ -2,6 +2,8 @@ import './style.css'
 import ProjectList from './projectList.js'
 import Project from './project.js'
 import Task from './task.js'
+import AddTaskBtn from './addTaskBtn.js'
+
 
 const projectsList = new ProjectList
 const project1 = new Project("Testproject", "This is my first project", "😊")
@@ -42,6 +44,8 @@ mainEl.appendChild(projectsList.renderCurrentProject())
 
 document.querySelector('#app').appendChild(asideEl)
 document.querySelector('#app').appendChild(mainEl)
+
+document.querySelector('#app').appendChild(AddTaskBtn.renderStaticButton())
 
 
 
