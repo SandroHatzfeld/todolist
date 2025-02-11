@@ -22,10 +22,10 @@ export default class Project {
 
 	#priorites = []
 
-	addPriorities(name, color) {
+	addPriorities(priority) {
 		this.#priorites.push({
-			name: name,
-			color: color
+			name: priority[0],
+			color: priority[1]
 		})
 	}
 

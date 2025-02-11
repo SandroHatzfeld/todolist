@@ -1,11 +1,17 @@
 import addBtn from "./assets/images/addBtn.svg"
 
 export default class AddTaskBtn{
+	static priorities = []
+
+	set setPriorities (priorities) {
+		priorities = priorities
+	}
+
 	static renderStaticButton() {
 		const buttonEl = document.createElement("img")
 		buttonEl.classList.add("addTaskBtn")
 		buttonEl.src = addBtn
-		buttonEl.addEventListener("click", (e)=> {
+		buttonEl.addEventListener("click", ()=> {
 			this.renderInputForm()
 		})
 	
@@ -31,7 +37,9 @@ export default class AddTaskBtn{
 				<label for="newTaskPriority">Priority</label>
 				<select id="newTaskPriority">
 					<option value="NULL" disabled selected hidden></option>
-					
+					${this.priorities.map((priority) => {
+						return `<option value="${priority.name}" style="${priority.color}">${priority.name}</option>`
+					}).join("")}
 				</select>
 			</div>
 			<div class="form-input-container">
@@ -52,4 +60,5 @@ export default class AddTaskBtn{
 		formWrapperEl.appendChild(formEl)
 		document.querySelector("body").appendChild(formWrapperEl)
 	}
+
 }

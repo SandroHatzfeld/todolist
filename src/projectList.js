@@ -22,6 +22,10 @@ export default class ProjectList {
 		this.#currentProjectIndex = index
 	}
 
+	get getCurrentProject() {
+		return this.#projects[this.#currentProjectIndex]
+	}
+
 	renderProjectsList() {
 		const projectItemsListEl = document.createElement("div")
 		projectItemsListEl.id = "project-list"
@@ -61,4 +65,6 @@ export default class ProjectList {
 
 		return containerEl
 	}
+
+
 }

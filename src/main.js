@@ -8,14 +8,16 @@ import AddTaskBtn from './addTaskBtn.js'
 const projectsList = new ProjectList
 const project1 = new Project("Testproject", "This is my first project", "😊")
 const project2 = new Project("Second Project", "This is my second project", "❤️")
+const project1Priorities = [["Asap", "#e26246"],["Medium", "#cdcd49"],["Soon", "#3db63d"],["None", "#d4d4d4"]]
+const project2Priorities = [["Soon", "#3db63d"],["None", "#d4d4d4"]]
 
-project1.addPriorities("Urgend", "#b74141")
-project1.addPriorities("Medium", "#cdcd49")
-project1.addPriorities("Soon", "#3db63d")
-project1.addPriorities("None", "#d4d4d4")
+project1Priorities.forEach(priority => {
+	project1.addPriorities(priority)
+});
+project2Priorities.forEach(priority => {
+	project2.addPriorities(priority)
+});
 
-project2.addPriorities("Soon", "#3db63d")
-project2.addPriorities("None", "#d4d4d4")
 
 const task1 = new Task("First Task", "Finish this project", project1.getPriorities[ 0 ])
 const task2 = new Task("Second Task", "Finish this project", project1.getPriorities[ 1 ])
@@ -33,6 +35,7 @@ project1.addTask = task3
 project1.addTask = task4
 
 project2.addTask = task5
+
 projectsList.addProject = project1
 projectsList.addProject = project2
 
@@ -46,6 +49,8 @@ document.querySelector('#app').appendChild(asideEl)
 document.querySelector('#app').appendChild(mainEl)
 
 document.querySelector('#app').appendChild(AddTaskBtn.renderStaticButton())
+document.querySelector('#app').appendChild(AddTaskBtn.renderInputForm(projectsList.getCurrentProject.getPriorities))
+
 
 
 
