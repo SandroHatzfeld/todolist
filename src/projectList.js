@@ -23,6 +23,6 @@ export default class ProjectList {
 	}
 
 	get getCurrentProject() {
-		return this.#projects[this.#currentProjectIndex]
+		return this.#projects[ this.#currentProjectIndex ]
 	}
 }

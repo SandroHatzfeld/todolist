@@ -1,13 +1,13 @@
 export default class TaskRenderer {
 	constructor(task) {
-		task
+		this.task = task
 	}
 
 	// render a task item
 	renderTaskItem() {
 		const taskEl = document.createElement("div")
 		taskEl.classList.add("task")
-		
+
 		// eventlistener for opening the item in a separate view
 		taskEl.addEventListener("click", (e) => {
 
@@ -16,12 +16,12 @@ export default class TaskRenderer {
 		const checkboxEl = document.createElement("div")
 		checkboxEl.classList.add("checkbox")
 		if (this.task.checked) { checkboxEl.classList.add("checked") }
-		
+
 		// eventlisterener to toggle the state
 		checkboxEl.addEventListener("click", (e) => {
 			e.stopPropagation()
 			this.task.checked = !this.task.checked
-			
+
 			checkboxEl.classList.toggle("checked")
 		})
 

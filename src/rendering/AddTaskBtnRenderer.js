@@ -4,12 +4,14 @@ import AddTaskFormRenderer from './AddTaskFormRenderer.js'
 export default class AddTaskBtnRenderer {
 	static priorities = []
 
+
+	
 	static renderStaticButton() {
 		const buttonEl = document.createElement("img")
 		buttonEl.classList.add("addTaskBtn")
 		buttonEl.src = addBtn
 		buttonEl.addEventListener("click", ()=> {
-			AddTaskBtnRenderer.priorities = this.priorities
+			AddTaskFormRenderer.priorities = this.priorities
 			AddTaskFormRenderer.renderInputForm()
 		})
 	
