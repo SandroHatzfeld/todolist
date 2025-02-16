@@ -1,24 +1,8 @@
-import addBtn from "./assets/images/addBtn.svg"
-
-export default class AddTaskBtn{
-	static priorities = []
-
-	set setPriorities (priorities) {
-		priorities = priorities
+export default class AddTaskFormRenderer {
+	constructor(priorities) {
+		priorities
 	}
-
-	static renderStaticButton() {
-		const buttonEl = document.createElement("img")
-		buttonEl.classList.add("addTaskBtn")
-		buttonEl.src = addBtn
-		buttonEl.addEventListener("click", ()=> {
-			this.renderInputForm()
-		})
-	
-		return buttonEl
-	}	
-
-	static renderInputForm() {
+	renderInputForm() {
 		const formWrapperEl = document.createElement("div")
 		formWrapperEl.classList.add("form-wrapper")
 
@@ -60,5 +44,4 @@ export default class AddTaskBtn{
 		formWrapperEl.appendChild(formEl)
 		document.querySelector("body").appendChild(formWrapperEl)
 	}
-
 }

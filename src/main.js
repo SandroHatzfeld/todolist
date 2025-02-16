@@ -2,8 +2,8 @@ import './style.css'
 import ProjectList from './projectList.js'
 import Project from './project.js'
 import Task from './task.js'
-import AddTaskBtn from './addTaskBtn.js'
-
+import AddTaskBtnRenderer from './rendering/AddTaskBtnRenderer.js'
+import ProjectListRenderer from './rendering/ProjectListRenderer.js'
 
 const projectsList = new ProjectList
 const project1 = new Project("Testproject", "This is my first project", "😊")
