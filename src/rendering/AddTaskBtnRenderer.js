@@ -1,14 +1,16 @@
 import addBtn from ".././assets/images/addBtn.svg"
-import AddTaskForm from './AddTaskFormRenderer.js'
+import AddTaskFormRenderer from './AddTaskFormRenderer.js'
 
 export default class AddTaskBtnRenderer {
-	 
-	renderStaticButton() {
+	static priorities = []
+
+	static renderStaticButton() {
 		const buttonEl = document.createElement("img")
 		buttonEl.classList.add("addTaskBtn")
 		buttonEl.src = addBtn
 		buttonEl.addEventListener("click", ()=> {
-			this.renderInputForm()
+			AddTaskBtnRenderer.priorities = this.priorities
+			AddTaskFormRenderer.renderInputForm()
 		})
 	
 		return buttonEl

@@ -3,7 +3,9 @@ import ProjectList from './projectList.js'
 import Project from './project.js'
 import Task from './task.js'
 import AddTaskBtnRenderer from './rendering/AddTaskBtnRenderer.js'
+import AddTaskFormRenderer from './rendering/AddTaskFormRenderer.js'
 import ProjectListRenderer from './rendering/ProjectListRenderer.js'
+import ProjectPanelRenderer from './rendering/ProjectPanelRenderer.js'
 
 const projectsList = new ProjectList
 const project1 = new Project("Testproject", "This is my first project", "😊")
@@ -40,16 +42,19 @@ projectsList.addProject = project1
 projectsList.addProject = project2
 
 const asideEl = document.createElement("aside")
-asideEl.appendChild(projectsList.renderProjectsList())
+ProjectListRenderer.projects = projectsList.getProjects
+asideEl.appendChild(ProjectListRenderer.renderProjectsList())
 
 const mainEl = document.createElement("main")
-mainEl.appendChild(projectsList.renderCurrentProject())
+ProjectPanelRenderer.project = projectsList.getCurrentProject
+
+mainEl.appendChild(ProjectPanelRenderer.renderCurrentProject())
 
 document.querySelector('#app').appendChild(asideEl)
 document.querySelector('#app').appendChild(mainEl)
 
-document.querySelector('#app').appendChild(AddTaskBtn.renderStaticButton())
-document.querySelector('#app').appendChild(AddTaskBtn.renderInputForm(projectsList.getCurrentProject.getPriorities))
+AddTaskBtnRenderer.priorities = projectsList.getCurrentProject.getPriorities
+document.querySelector('#app').appendChild(AddTaskBtnRenderer.renderStaticButton())
 
 
 

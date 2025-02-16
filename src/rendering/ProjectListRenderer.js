@@ -1,13 +1,9 @@
 import ProjectPanelRenderer from './ProjectPanelRenderer.js'
 
 export default class ProjectListRenderer {
-	constructor(projects) {
-		projects
-	}
+	static projects = []
 
-	projectPanelRender = new ProjectPanelRenderer()
-
-	renderProjectsList() {
+	static renderProjectsList() {
 		const projectItemsListEl = document.createElement("div")
 		projectItemsListEl.id = "project-list"
 
@@ -19,7 +15,7 @@ export default class ProjectListRenderer {
 				this.setCurrentProject = parseInt(e.target.dataset.projectIndex)
 				const mainEl = document.querySelector('main')
 				mainEl.innerHTML = ''
-				mainEl.appendChild(this.projectPanelRender.renderCurrentProject())
+				mainEl.appendChild(ProjectPanelRenderer.renderCurrentProject())
 			})
 
 			projectItemEl.dataset.projectIndex = index
@@ -29,5 +25,4 @@ export default class ProjectListRenderer {
 		})
 		return projectItemsListEl
 	}
-
 }

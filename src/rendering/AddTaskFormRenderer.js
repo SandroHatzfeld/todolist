@@ -1,8 +1,7 @@
 export default class AddTaskFormRenderer {
-	constructor(priorities) {
-		priorities
-	}
-	renderInputForm() {
+	static priorities = []
+
+	static renderInputForm() {
 		const formWrapperEl = document.createElement("div")
 		formWrapperEl.classList.add("form-wrapper")
 

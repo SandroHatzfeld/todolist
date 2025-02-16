@@ -1,35 +1,34 @@
+import TaskRenderer from './TaskRenderer.js';
+
 export default class ProjectPanelRenderer {
-	constructor(priorities, tasks, project, currentProjectIndex) {
-		priorities
-		tasks
-		project
-		currentProjectIndex
-	}
+	
+	static project
+	static currentProjectIndex = 0
+	
 
-	renderCurrentProject() {
-		const currentProject = this.projects[ this.currentProjectIndex ]
-
+	static renderCurrentProject() {
+	
 		const containerEl = document.createElement("div")
 		containerEl.id = "container"
 
 		const projectHeadlineEl = document.createElement("h1")
-		projectHeadlineEl.innerHTML = "<span class='project-icon'>" + currentProject.icon + "</span>" + currentProject.title
+		projectHeadlineEl.innerHTML = "<span class='project-icon'>" + this.project.icon + "</span>" + this.project.title
 
 		const projectDescriptionEl = document.createElement("p")
-		projectDescriptionEl.innerHTML = currentProject.description
+		projectDescriptionEl.innerHTML = this.project.description
 
 		containerEl.appendChild(projectHeadlineEl)
 		containerEl.appendChild(projectDescriptionEl)
-		containerEl.appendChild(currentProject.renderProjectPrioritySorted())
+		containerEl.appendChild(this.renderProjectPrioritySorted())
 
 		return containerEl
 	}
 
-	renderProjectPrioritySorted() {
+	static renderProjectPrioritySorted() {
 		const prioritySortingEl = document.createElement("div")
 		prioritySortingEl.id = "priority-sorting"
 
-		this.priorities.forEach(priority => {
+		this.project.getPriorities.forEach(priority => {
 			const priorityColumnEl = document.createElement("div")
 			priorityColumnEl.classList.add("priority")
 			priorityColumnEl.style.backgroundColor = priority.color
@@ -39,9 +38,12 @@ export default class ProjectPanelRenderer {
 
 			const priorityItemsEl = document.createElement("div")
 			priorityItemsEl.classList.add("priority-items")
-
-			const taskInPriorityEl = this.tasks.filter((task) => task.priority === priority)
-			taskInPriorityEl.forEach((task) => {
+						
+			const taskInPriorityEl = this.project.getTasks.filter((task) => task.priority === priority)
+			taskInPriorityEl.forEach((taskData) => {
+				const task = new TaskRenderer(taskData)
+				console.log(taskData);
+				
 				const taskEl = task.renderTaskItem()
 				priorityItemsEl.appendChild(taskEl)
 			})

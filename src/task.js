@@ -33,4 +33,7 @@ export default class Task {
 	set setPriority(priority) {
 		this.priority = priority
 	}
+	get getPriority() {
+		return this.priority
+	}
 }
