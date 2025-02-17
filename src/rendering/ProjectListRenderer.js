@@ -1,29 +1,25 @@
-import Project from '../project.js'
+import Controller from '../controller.js';
+import ProjectList from '../projectList.js';
 import ProjectPanelRenderer from './ProjectPanelRenderer.js'
 
 export default class ProjectListRenderer {
-	static projects = [];
+	static #projects = ProjectList.projects
 
-	/**
-	 * @param {Project} projects
-	 */
-	static set projects(projects) {
-		this.projects = projects
-	}
 
 	static renderProjectsList() {
+		this.#projects = ProjectList.projects
+
 		const projectItemsListEl = document.createElement("div")
 		projectItemsListEl.id = "project-list"
 
-		this.projects.forEach((project, index) => {
+		this.#projects.forEach((project, index) => {
 			const projectItemEl = document.createElement("span")
 			projectItemEl.classList.add("project-item")
 
 			projectItemEl.addEventListener("click", (e) => {
-				ProjectPanelRenderer.project = project
-				const mainEl = document.querySelector('main')
-				mainEl.innerHTML = ''
-				mainEl.appendChild(ProjectPanelRenderer.renderCurrentProject())
+				ProjectList.currentProject = index
+				
+				Controller.renderToScreen()
 			})
 
 			projectItemEl.dataset.projectIndex = index

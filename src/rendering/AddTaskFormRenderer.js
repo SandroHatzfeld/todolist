@@ -1,11 +1,10 @@
 import Controller from '../controller.js'
+import ProjectList from '../projectList.js'
 import Task from '../task.js'
 
 export default class AddTaskFormRenderer {
 	static priorities = []
 
-
-	
 	static renderInputForm() {
 		const formWrapperEl = document.createElement("div")
 		formWrapperEl.classList.add("form-wrapper")
@@ -48,11 +47,16 @@ export default class AddTaskFormRenderer {
 			}
 			const newTaskName = document.querySelector("#newTaskName").value
 			const newTaskDescription = document.querySelector("#newTaskDescription").value
-			const newTaskPriority = document.querySelector("#newTaskPriority").value
+			const newTaskPriorityName = document.querySelector("#newTaskPriority").value
 			const newTaskDate = document.querySelector("#newTaskDate").value
 
-			const newTask = new Task(newTaskName, newTaskDescription, newTaskPriority, newTaskDate)
-			Controller.pushNewTask(newTask)
+			// Find the matching priority object
+			const priorityObject = this.priorities.find(p => p.name === newTaskPriorityName)
+			
+			const newTask = new Task(newTaskName, newTaskDescription, priorityObject, newTaskDate)
+			ProjectList.currentProject.tasks = newTask
+			
+			Controller.renderToScreen()
 			document.querySelector("body").removeChild(formWrapperEl)
 		})
 

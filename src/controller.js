@@ -10,16 +10,17 @@ export default class Controller {
 	static pushNewTask(task) {
 		const currentProject = ProjectList.currentProject
 		currentProject.tasks = task
-		
+
 		ProjectPanelRenderer.project = currentProject
+
 		this.renderToScreen()
 	}
 
 	static run() {
 		const project1 = new Project("Testproject", "This is my first project", "😊")
 		const project2 = new Project("Second Project", "This is my second project", "❤️")
-		const project1Priorities = [ [ "Asap", "#e26246" ], [ "Medium", "#cdcd49" ], [ "Soon", "#3db63d" ], [ "None", "#d4d4d4" ] ]
-		const project2Priorities = [ [ "Soon", "#3db63d" ], [ "None", "#d4d4d4" ] ]
+		const project1Priorities = [ { name: "Asap", color: "#e26246" }, { name: "Medium", color: "#cdcd49" }, { name: "Soon", color: "#3db63d" }, { name: "None", color: "#d4d4d4" } ]
+		const project2Priorities = [ { name: "Soon", color: "#3db63d" }, { name: "None", color: "#d4d4d4" } ]
 
 		project1Priorities.forEach(priority => {
 			project1.priorities = priority
@@ -49,26 +50,23 @@ export default class Controller {
 		ProjectList.projects = project1
 		ProjectList.projects = project2
 
+		AddTaskBtnRenderer.priorities = ProjectList.currentProject.priorities
+
 		this.renderToScreen()
 
 	}
 
 	static renderToScreen() {
-		const app = document.querySelector("#app")
-		app.innerHTML = ""
-
+		document.querySelector('#app').innerHTML = ""
 		const asideEl = document.createElement("aside")
-		ProjectListRenderer.projects = ProjectList.projects
 		asideEl.appendChild(ProjectListRenderer.renderProjectsList())
 
 		const mainEl = document.createElement("main")
-		ProjectPanelRenderer.project = ProjectList.currentProject
 		mainEl.appendChild(ProjectPanelRenderer.renderCurrentProject())
 
-		app.appendChild(asideEl)
-		app.appendChild(mainEl)
+		document.querySelector('#app').appendChild(asideEl)
+		document.querySelector('#app').appendChild(mainEl)
 
-		AddTaskBtnRenderer.priorities = ProjectList.currentProject.priorities
-		app.appendChild(AddTaskBtnRenderer.renderStaticButton())
+		document.querySelector('#app').appendChild(AddTaskBtnRenderer.renderStaticButton())
 	}
 }

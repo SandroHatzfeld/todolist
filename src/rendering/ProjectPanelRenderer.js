@@ -1,27 +1,20 @@
-import Project from '../project.js'
+import ProjectList from '../projectList.js'
 import TaskRenderer from './TaskRenderer.js'
 
 export default class ProjectPanelRenderer {
-	static project
-
-	/**
-	 * @param {Project} project
-	 */
-	static set project(project) {
-		this.project = project
-	}
-
-	static currentProjectIndex = 0;
+	static #project = ProjectList.currentProject
 
 	static renderCurrentProject() {
+		this.#project = ProjectList.currentProject
+		
 		const containerEl = document.createElement("div")
 		containerEl.id = "container"
 
 		const projectHeadlineEl = document.createElement("h1")
-		projectHeadlineEl.innerHTML = "<span class='project-icon'>" + this.project.icon + "</span>" + this.project.title
+		projectHeadlineEl.innerHTML = "<span class='project-icon'>" + this.#project.icon + "</span>" + this.#project.title
 
 		const projectDescriptionEl = document.createElement("p")
-		projectDescriptionEl.innerHTML = this.project.description
+		projectDescriptionEl.innerHTML = this.#project.description
 
 		containerEl.appendChild(projectHeadlineEl)
 		containerEl.appendChild(projectDescriptionEl)
@@ -34,7 +27,7 @@ export default class ProjectPanelRenderer {
 		const prioritySortingEl = document.createElement("div")
 		prioritySortingEl.id = "priority-sorting"
 
-		this.project.priorities.forEach(priority => {
+		this.#project.priorities.forEach(priority => {
 			const priorityColumnEl = document.createElement("div")
 			priorityColumnEl.classList.add("priority")
 			priorityColumnEl.style.backgroundColor = priority.color
@@ -45,8 +38,9 @@ export default class ProjectPanelRenderer {
 			const priorityItemsEl = document.createElement("div")
 			priorityItemsEl.classList.add("priority-items")
 
- 			
-			const taskInPriorityEl = this.project.tasks.filter((task) => task.priority === priority)
+			const taskInPriorityEl = this.#project.tasks.filter((task) => {
+				return task.priority.name === priority.name
+			})
 			taskInPriorityEl.forEach((taskData) => {
 				const task = new TaskRenderer(taskData)
 				

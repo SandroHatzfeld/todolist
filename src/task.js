@@ -4,6 +4,8 @@ export default class Task {
 		this.description = description
 		this.priority = priority
 		this.dueDate = dueDate
+		console.log(this.priority);
+		
 	}
 
 	// /**

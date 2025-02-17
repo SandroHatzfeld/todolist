@@ -24,8 +24,8 @@ export default class Project {
 
 	set priorities(priority) {
 		this.#priorites.push({
-			name: priority[0],
-			color: priority[1]
+			name: priority.name,
+			color: priority.color
 		})
 	}
 
