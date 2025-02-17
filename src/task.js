@@ -3,9 +3,8 @@ export default class Task {
 		this.title = title
 		this.description = description
 		this.priority = priority
-		this.dueDate = dueDate
-		console.log(this.priority);
-		
+		this.dueDate = dueDate	
+		this.checked = false
 	}
 
 	// /**
