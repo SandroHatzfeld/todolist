@@ -1,8 +1,12 @@
+import Project from '../project.js'
 import TaskRenderer from './TaskRenderer.js'
 
 export default class ProjectPanelRenderer {
 	static project
 
+	/**
+	 * @param {Project} project
+	 */
 	static set project(project) {
 		this.project = project
 	}
@@ -30,7 +34,7 @@ export default class ProjectPanelRenderer {
 		const prioritySortingEl = document.createElement("div")
 		prioritySortingEl.id = "priority-sorting"
 
-		this.project.getPriorities.forEach(priority => {
+		this.project.priorities.forEach(priority => {
 			const priorityColumnEl = document.createElement("div")
 			priorityColumnEl.classList.add("priority")
 			priorityColumnEl.style.backgroundColor = priority.color
@@ -41,8 +45,8 @@ export default class ProjectPanelRenderer {
 			const priorityItemsEl = document.createElement("div")
 			priorityItemsEl.classList.add("priority-items")
 
-			
-			const taskInPriorityEl = this.project.getTasks.filter((task) => task.priority === priority)
+ 			
+			const taskInPriorityEl = this.project.tasks.filter((task) => task.priority === priority)
 			taskInPriorityEl.forEach((taskData) => {
 				const task = new TaskRenderer(taskData)
 				

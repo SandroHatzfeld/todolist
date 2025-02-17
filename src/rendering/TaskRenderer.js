@@ -20,7 +20,7 @@ export default class TaskRenderer {
 		// eventlisterener to toggle the state
 		checkboxEl.addEventListener("click", (e) => {
 			e.stopPropagation()
-			this.task.checked = !this.task.checked
+			this.task.state = !this.task.state
 
 			checkboxEl.classList.toggle("checked")
 		})

@@ -1,20 +1,21 @@
 export default class Task {
-	constructor(title, description, priority) {
+	constructor(title, description, priority, dueDate) {
 		this.title = title
 		this.description = description
 		this.priority = priority
+		this.dueDate = dueDate
 	}
 
-	/**
-	 * @param {Date} date
-	 */
-	set dueDate(date) {
-		this._dueDate = date
-	}
+	// /**
+	//  * @param {Date} date
+	//  */
+	// set DueDate(date) {
+	// 	this._dueDate = date
+	// }
 
-	get dueDate() {
-		return this._dueDate
-	}
+	// get DueDate() {
+	// 	return this._dueDate
+	// }
 
 	/**
 	 * @param {boolean} state
@@ -27,14 +28,14 @@ export default class Task {
 		return this.checked
 	}
 
-	/**
-	 * @param {number} priority
-	 */
-	set setPriority(priority) {
-		this.priority = priority
-	}
+	// /**
+	//  * @param {number} priority
+	//  */
+	// set Priority(priority) {
+	// 	this.priority = priority
+	// }
 
-	get getPriority() {
-		return this.priority
-	}
+	// get Priority() {
+	// 	return this.priority
+	// }
 }

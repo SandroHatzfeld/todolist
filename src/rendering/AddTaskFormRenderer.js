@@ -1,3 +1,6 @@
+import Controller from '../controller.js'
+import Task from '../task.js'
+
 export default class AddTaskFormRenderer {
 	static priorities = []
 
@@ -11,7 +14,7 @@ export default class AddTaskFormRenderer {
 		formEl.innerHTML = `
 			<h1>New Task</h1>
 			<div class="form-input-container">
-				<label for="newTaskName">Name</label>
+				<label for="newTaskName">Name*</label>
 				<input id="newTaskName">
 			</div>
 			<div class="form-input-container">
@@ -19,9 +22,10 @@ export default class AddTaskFormRenderer {
 				<input id="newTaskDescription">
 			</div>
 			<div class="form-input-container">
-				<label for="newTaskPriority">Priority</label>
+				<label for="newTaskPriority">Priority*</label>
 				<select id="newTaskPriority">
-					<option value="NULL" disabled selected hidden></option>
+					<option disabled selected hidden></option>
+
 					${this.priorities.map((priority) => {
 						return `<option value="${priority.name}" style="${priority.color}">${priority.name}</option>`
 					}).join("")}
@@ -29,7 +33,7 @@ export default class AddTaskFormRenderer {
 			</div>
 			<div class="form-input-container">
 				<label for="newTaskDate">Due Date</label>
-				<input id="newTaskDate">
+				<input id="newTaskDate" type="date">
 			</div>
 		`
 
@@ -38,6 +42,18 @@ export default class AddTaskFormRenderer {
 		submitNewTask.type = "submit"
 		submitNewTask.addEventListener("click", (e) => {
 			e.preventDefault()
+			if (!formEl.checkValidity()) {
+				formEl.reportValidity()
+				return
+			}
+			const newTaskName = document.querySelector("#newTaskName").value
+			const newTaskDescription = document.querySelector("#newTaskDescription").value
+			const newTaskPriority = document.querySelector("#newTaskPriority").value
+			const newTaskDate = document.querySelector("#newTaskDate").value
+
+			const newTask = new Task(newTaskName, newTaskDescription, newTaskPriority, newTaskDate)
+			Controller.pushNewTask(newTask)
+			document.querySelector("body").removeChild(formWrapperEl)
 		})
 
 		formEl.appendChild(submitNewTask)

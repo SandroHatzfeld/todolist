@@ -1,28 +1,28 @@
 import Project from './project.js'
 
 export default class ProjectList {
-	#projects = []
+	static #projects = []
 	/**
 	 * @param {Project} project
 	 */
-	set addProject(project) {
+	static set projects(project) {
 		this.#projects.push(project)
 	}
 
-	get getProjects() {
+	static get projects() {
 		return this.#projects
 	}
 
-	#currentProjectIndex = 0
+	static #currentProjectIndex = 0
 
 	/**
 	 * @param {number} index
 	 */
-	set setCurrentProject(index) {
+	static set currentProject(index) {
 		this.#currentProjectIndex = index
 	}
 
-	get getCurrentProject() {
+	static get currentProject() {
 		return this.#projects[ this.#currentProjectIndex ]
 	}
 }

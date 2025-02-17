@@ -12,24 +12,24 @@ export default class Project {
 	/**
 	 * @param {Task} task
 	 */
-	set addTask(task) {
+	set tasks(task) {
 		this.#tasks.push(task)
 	}
 
-	get getTasks() {
+	get tasks() {
 		return this.#tasks
 	}
 
 	#priorites = []
 
-	addPriorities(priority) {
+	set priorities(priority) {
 		this.#priorites.push({
 			name: priority[0],
 			color: priority[1]
 		})
 	}
 
-	get getPriorities() {
+	get priorities() {
 		return this.#priorites
 	}	
 }

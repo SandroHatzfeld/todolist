@@ -1,8 +1,12 @@
+import Project from '../project.js'
 import ProjectPanelRenderer from './ProjectPanelRenderer.js'
 
 export default class ProjectListRenderer {
 	static projects = [];
 
+	/**
+	 * @param {Project} projects
+	 */
 	static set projects(projects) {
 		this.projects = projects
 	}
