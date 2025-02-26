@@ -149,11 +149,21 @@ main {
 .popup-flex-container {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .open-task-wrapper form{
   min-width: 600px;
   min-height: 400px;
+}
+.open-task-wrapper .checkbox {
+  height: 2rem;
+  width: 2rem;
+}
+.open-task-wrapper .checkbox.checked::after {
+  font-size: 1.5rem;
+  top: -0.35rem;
+  left: -0.05rem;
 }
 .newProjectPriorityContainer {
   display: grid;

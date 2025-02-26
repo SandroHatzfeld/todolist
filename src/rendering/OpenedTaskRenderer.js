@@ -19,7 +19,10 @@ export default class OpenedTaskRenderer {
 
 		const popupFormEl = document.createElement("form")
 		popupFormEl.innerHTML = `
+			<div class="popup-flex-container">
+				<div id="taskCheckbox" class="checkbox ${this.task.checked ? 'checked' : ''}" ></div>
 				<h1 class="popup-input-editable" id="taskTitle" contenteditable="true">${this.task.title}</h1>
+			</div>
 				<select id="taskPriority">
 						<option selected>${this.task.priority.name}</option>
 	
@@ -33,9 +36,35 @@ export default class OpenedTaskRenderer {
 
 		popupWrapperEl.appendChild(popupFormEl)
 		document.querySelector("body").appendChild(popupWrapperEl)
+
+		const taskCheckboxEl = document.querySelector("#taskCheckbox")
+
+		// eventlisterener to toggle the state
+		taskCheckboxEl.addEventListener("click", (e) => {
+			e.stopPropagation()
+			this.task.state = !this.task.state
+
+			taskCheckboxEl.classList.toggle("checked")
+		})
+
 	}
 
 	static returnValues() {
-		
+		const taskTitleEl = document.querySelector("#taskTitle")
+		const taskPriorityEl = document.querySelector("#taskPriority")
+		if (this.task.dueDate) {
+			const taskDueDateEl = document.querySelector("#taskDueDate")
+			this.task.dueDate = taskDueDateEl.value
+		}
+		const taskDescriptionEl = document.querySelector("#taskDescription")
+
+		this.task.title = taskTitleEl.innerHTML
+
+		// Find the matching priority object
+		const priorityObject = ProjectList.currentProject.priorities.find(p => p.name === taskPriorityEl.value)
+
+		this.task.priority = priorityObject 
+
+		this.task.description = taskDescriptionEl.innerHTML
 	}
 }
