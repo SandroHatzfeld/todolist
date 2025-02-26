@@ -4,35 +4,35 @@ import ProjectList from '../projectList.js'
 
 export default class AddProjectFormRenderer {
 	static renderInputForm() {
-		const formWrapperEl = document.createElement("div")
-		formWrapperEl.classList.add("form-wrapper")
+		const popupWrapperEl = document.createElement("div")
+		popupWrapperEl.classList.add("popup-wrapper")
 
-		formWrapperEl.addEventListener("click", (e) => {
+		popupWrapperEl.addEventListener("click", (e) => {
 			if(e.currentTarget === e.target) {
 				e.currentTarget.remove()
 			}
 		})
 
-		const formEl = document.createElement("form")
-		formEl.innerHTML = `
+		const popupFormEl = document.createElement("form")
+		popupFormEl.innerHTML = `
 			<h1>New Project</h1>
-			<div class="form-input-container">
+			<div class="popup-input-container">
 				<label for="newProjectName">Name*</label>
 				<input id="newProjectName" required>
 			</div>
-			<div class="form-input-container">
+			<div class="popup-input-container">
 				<label for="newProjectIcon">Icon</label>
 				<input id="newProjectIcon">
 			</div>
-			<div class="form-input-container">
+			<div class="popup-input-container">
 				<label for="newProjectDescription">Description</label>
 				<input id="newProjectDescription">
 			</div>
-			<div class="form-input-container" id="newProjectPriorityWrapper"></div>
+			<div class="popup-input-container" id="newProjectPriorityWrapper"></div>
 		`
 
 		const addNewProjectPriorityBtn = document.createElement("input")
-		addNewProjectPriorityBtn.classList.add("form-flex-container")
+		addNewProjectPriorityBtn.classList.add("popup-flex-container")
 		addNewProjectPriorityBtn.value = "Add a Priority"
 		addNewProjectPriorityBtn.type = "submit"
 
@@ -42,7 +42,7 @@ export default class AddProjectFormRenderer {
 			AddProjectFormRenderer.addNewPriorityInput()
 		})
 
-		formEl.appendChild(addNewProjectPriorityBtn)
+		popupFormEl.appendChild(addNewProjectPriorityBtn)
 
 		
 
@@ -51,8 +51,8 @@ export default class AddProjectFormRenderer {
 		submitNewProject.type = "submit"
 		submitNewProject.addEventListener("click", (e) => {
 			e.preventDefault()
-			if (!formEl.checkValidity()) {
-				formEl.reportValidity()
+			if (!popupFormEl.checkValidity()) {
+				popupFormEl.reportValidity()
 				return
 			}
 			const newProjectName = document.querySelector("#newProjectName").value
@@ -74,26 +74,26 @@ export default class AddProjectFormRenderer {
 			ProjectList.projects = newProject
 
 			Controller.renderToScreen()
-			document.querySelector("body").removeChild(formWrapperEl)
+			document.querySelector("body").removeChild(popupWrapperEl)
 		})
 
-		formEl.appendChild(submitNewProject)
+		popupFormEl.appendChild(submitNewProject)
 
-		formWrapperEl.appendChild(formEl)
-		document.querySelector("body").appendChild(formWrapperEl)
+		popupWrapperEl.appendChild(popupFormEl)
+		document.querySelector("body").appendChild(popupWrapperEl)
 		
 		AddProjectFormRenderer.addNewPriorityInput()
 	}
 
 
 	static addNewPriorityInput() {
-		const index = document.querySelectorAll(".form-flex-container").length
+		const index = document.querySelectorAll(".popup-flex-container").length
 
 		const inputWrapper = document.createElement("div")
-		inputWrapper.classList.add("form-flex-container")
+		inputWrapper.classList.add("popup-flex-container")
 
 		const inputNameContainer = document.createElement("div")
-		inputNameContainer.classList.add("form-input-container")
+		inputNameContainer.classList.add("popup-input-container")
 
 		const inputNameLabel = document.createElement("label")
 		inputNameLabel.innerHTML = `${index}. Priority Name*`
@@ -105,7 +105,7 @@ export default class AddProjectFormRenderer {
 		inputName.required = true
 		
 		const inputColorContainer = document.createElement("div")
-		inputColorContainer.classList.add("form-input-container")
+		inputColorContainer.classList.add("popup-input-container")
 		
 		
 		const inputColorLabel = document.createElement("label")

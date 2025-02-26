@@ -1,3 +1,5 @@
+import OpenedTaskRenderer from './OpenedTaskRenderer.js'
+
 export default class TaskRenderer {
 	constructor(task) {
 		this.task = task
@@ -10,7 +12,8 @@ export default class TaskRenderer {
 
 		// eventlistener for opening the item in a separate view
 		taskEl.addEventListener("click", (e) => {
-
+			OpenedTaskRenderer.task = this.task
+			OpenedTaskRenderer.renderInputForm()
 		})
 
 		const checkboxEl = document.createElement("div")

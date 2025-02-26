@@ -7,17 +7,6 @@ export default class Task {
 		this.checked = false
 	}
 
-	// /**
-	//  * @param {Date} date
-	//  */
-	// set DueDate(date) {
-	// 	this._dueDate = date
-	// }
-
-	// get DueDate() {
-	// 	return this._dueDate
-	// }
-
 	/**
 	 * @param {boolean} state
 	 */
@@ -29,14 +18,4 @@ export default class Task {
 		return this.checked
 	}
 
-	// /**
-	//  * @param {number} priority
-	//  */
-	// set Priority(priority) {
-	// 	this.priority = priority
-	// }
-
-	// get Priority() {
-	// 	return this.priority
-	// }
 }

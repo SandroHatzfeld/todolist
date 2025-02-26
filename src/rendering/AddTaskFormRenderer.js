@@ -6,27 +6,27 @@ export default class AddTaskFormRenderer {
 	static priorities = []
 
 	static renderInputForm() {
-		const formWrapperEl = document.createElement("div")
-		formWrapperEl.classList.add("form-wrapper")
+		const popupWrapperEl = document.createElement("div")
+		popupWrapperEl.classList.add("popup-wrapper")
 
-		formWrapperEl.addEventListener("click", (e) => {
+		popupWrapperEl.addEventListener("click", (e) => {
 			if(e.currentTarget === e.target) {
 				e.currentTarget.remove()
 			}
 		})
 
-		const formEl = document.createElement("form")
-		formEl.innerHTML = `
+		const popupFormEl = document.createElement("form")
+		popupFormEl.innerHTML = `
 			<h1>New Task</h1>
-			<div class="form-input-container">
+			<div class="popup-input-container">
 				<label for="newTaskName">Name*</label>
 				<input id="newTaskName">
 			</div>
-			<div class="form-input-container">
+			<div class="popup-input-container">
 				<label for="newTaskDescription">Description</label>
 				<input id="newTaskDescription">
 			</div>
-			<div class="form-input-container">
+			<div class="popup-input-container">
 				<label for="newTaskPriority">Priority*</label>
 				<select id="newTaskPriority">
 					<option disabled selected hidden></option>
@@ -36,7 +36,7 @@ export default class AddTaskFormRenderer {
 					}).join("")}
 				</select>
 			</div>
-			<div class="form-input-container">
+			<div class="popup-input-container">
 				<label for="newTaskDate">Due Date</label>
 				<input id="newTaskDate" type="date">
 			</div>
@@ -47,8 +47,8 @@ export default class AddTaskFormRenderer {
 		submitNewTask.type = "submit"
 		submitNewTask.addEventListener("click", (e) => {
 			e.preventDefault()
-			if (!formEl.checkValidity()) {
-				formEl.reportValidity()
+			if (!popupFormEl.checkValidity()) {
+				popupFormEl.reportValidity()
 				return
 			}
 			const newTaskName = document.querySelector("#newTaskName").value
@@ -63,12 +63,12 @@ export default class AddTaskFormRenderer {
 			ProjectList.currentProject.tasks = newTask
 			
 			Controller.renderToScreen()
-			document.querySelector("body").removeChild(formWrapperEl)
+			document.querySelector("body").removeChild(popupWrapperEl)
 		})
 
-		formEl.appendChild(submitNewTask)
+		popupFormEl.appendChild(submitNewTask)
 
-		formWrapperEl.appendChild(formEl)
-		document.querySelector("body").appendChild(formWrapperEl)
+		popupWrapperEl.appendChild(popupFormEl)
+		document.querySelector("body").appendChild(popupWrapperEl)
 	}
 }

@@ -5,7 +5,7 @@
   font-size: 20px;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(255, 255, 255, 1);
   background-color: #242424;
 
   font-synthesis: none;
@@ -127,7 +127,7 @@ main {
   z-index: 99999;
 }
 
-.form-wrapper {
+.popup-wrapper, .open-task-wrapper{
   position: fixed;
   inset: 0;
   display: grid;
@@ -135,20 +135,25 @@ main {
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
-.form-wrapper form {
+.popup-wrapper form {
   padding: 1rem;
   min-width: 300px;
   border-radius: 0.5rem;
   background-color: #242424;
   cursor: auto;
 }
-.form-input-container {
+.popup-input-container {
   display: grid;
   margin-bottom: 0.5rem;
 }
-.form-flex-container {
+.popup-flex-container {
   display: flex;
   gap: 1rem;
+}
+
+.open-task-wrapper form{
+  min-width: 600px;
+  min-height: 400px;
 }
 .newProjectPriorityContainer {
   display: grid;
