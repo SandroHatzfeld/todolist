@@ -6,6 +6,7 @@ import AddTaskBtnRenderer from './rendering/AddTaskBtnRenderer.js'
 import ProjectListRenderer from './rendering/ProjectListRenderer.js'
 import ProjectPanelRenderer from './rendering/ProjectPanelRenderer.js'
 import Storage from './storage.js'
+import AddProjectBtnRenderer from './rendering/AddProjectBtnRenderer.js'
 
 export default class Controller {
 	static pushNewTask(task) {
@@ -74,5 +75,6 @@ export default class Controller {
 		document.querySelector('#app').appendChild(mainEl)
 
 		document.querySelector('#app').appendChild(AddTaskBtnRenderer.renderStaticButton())
+		document.querySelector('#app').appendChild(AddProjectBtnRenderer.renderStaticButton())
 	}
 }

@@ -9,6 +9,12 @@ export default class AddTaskFormRenderer {
 		const formWrapperEl = document.createElement("div")
 		formWrapperEl.classList.add("form-wrapper")
 
+		formWrapperEl.addEventListener("click", (e) => {
+			if(e.currentTarget === e.target) {
+				e.currentTarget.remove()
+			}
+		})
+
 		const formEl = document.createElement("form")
 		formEl.innerHTML = `
 			<h1>New Task</h1>

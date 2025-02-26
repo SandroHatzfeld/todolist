@@ -114,12 +114,17 @@ main {
 .due-date {
   font-size: 0.85rem;
 }
-.addTaskBtn {
+.addBtn {
   width: 3rem;
   height: 3rem;
   position: fixed;
   bottom: 1rem;
   right: 1rem;
+}
+.addProjectBtn {
+  right: auto;
+  left: 1rem;
+  z-index: 99999;
 }
 
 .form-wrapper {
@@ -128,13 +133,26 @@ main {
   display: grid;
   place-items: center;
   background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 .form-wrapper form {
   padding: 1rem;
   min-width: 300px;
   border-radius: 0.5rem;
   background-color: #242424;
+  cursor: auto;
 }
 .form-input-container {
   display: grid;
+  margin-bottom: 0.5rem;
+}
+.form-flex-container {
+  display: flex;
+  gap: 1rem;
+}
+.newProjectPriorityContainer {
+  display: grid;
+}
+input[type="submit"],input[type="select"] {
+  cursor: pointer;
 }

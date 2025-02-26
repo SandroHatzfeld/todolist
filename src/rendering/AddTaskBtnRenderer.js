@@ -11,6 +11,7 @@ export default class AddTaskBtnRenderer {
 		this.#priorities = ProjectList.currentProject.priorities
 		const buttonEl = document.createElement("img")
 		buttonEl.classList.add("addTaskBtn")
+		buttonEl.classList.add("addBtn")
 		buttonEl.src = addBtn
 		buttonEl.addEventListener("click", ()=> {
 			AddTaskFormRenderer.priorities = this.#priorities
