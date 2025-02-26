@@ -1,5 +1,6 @@
 import Controller from '../controller.js'
 import Project from '../project.js'
+import ProjectList from '../projectList.js'
 
 export default class AddProjectFormRenderer {
 	static renderInputForm() {
@@ -20,7 +21,7 @@ export default class AddProjectFormRenderer {
 				<input id="newProjectName" required>
 			</div>
 			<div class="form-input-container">
-				<label for="newProjectIcon">Icon*</label>
+				<label for="newProjectIcon">Icon</label>
 				<input id="newProjectIcon">
 			</div>
 			<div class="form-input-container">
@@ -55,20 +56,22 @@ export default class AddProjectFormRenderer {
 				return
 			}
 			const newProjectName = document.querySelector("#newProjectName").value
-			const newProjectIcon = document.querySelector("#newProjectIcon").value
-			const newProjectDescription = document.querySelector("#newProjectDescription").value
+			const newProjectIcon = document.querySelector("#newProjectIcon").value || ""
+			const newProjectDescription = document.querySelector("#newProjectDescription").value || ""
 
 			const newProject = new Project(newProjectName, newProjectDescription, newProjectIcon)
 
-			const newProjectPriorityName = document.querySelectorAll(".newPriorityName").value
-			const newProjectPriorityColor = document.querySelectorAll(".newPriorityColor").value
+			const newProjectPriorityName = document.querySelectorAll(".newPriorityName")
+			const newProjectPriorityColor = document.querySelectorAll(".newPriorityColor")
 
 
-			newProjectPriorityName.forEach((name, index) => {
-				const priority = { name: name, color: newProjectPriorityColor[ index ] }
+			newProjectPriorityName.forEach((priorityName, index) => {
+				const priority = { name: priorityName.value, color: newProjectPriorityColor[ index ].value }
 
 				newProject.priorities = priority
 			})
+
+			ProjectList.projects = newProject
 
 			Controller.renderToScreen()
 			document.querySelector("body").removeChild(formWrapperEl)
@@ -84,7 +87,7 @@ export default class AddProjectFormRenderer {
 
 
 	static addNewPriorityInput() {
-		const index = document.querySelectorAll(".form-flex-container").length + 1
+		const index = document.querySelectorAll(".form-flex-container").length
 
 		const inputWrapper = document.createElement("div")
 		inputWrapper.classList.add("form-flex-container")
@@ -98,6 +101,7 @@ export default class AddProjectFormRenderer {
 
 		const inputName = document.createElement("input")
 		inputName.id = "newProjectPriorityName" + index
+		inputName.classList.add("newPriorityName")
 		inputName.required = true
 		
 		const inputColorContainer = document.createElement("div")
@@ -109,7 +113,10 @@ export default class AddProjectFormRenderer {
 		inputColorLabel.for = "newProjectPriorityColor" + index
 		
 		const inputColor = document.createElement("input")
+		inputColor.type = "color"
+		inputColor.value = "#ffffff"
 		inputColor.id = "newProjectPriorityColor" + index
+		inputColor.classList.add("newPriorityColor")
 		inputColor.required = true
 
 		inputNameContainer.appendChild(inputNameLabel)
