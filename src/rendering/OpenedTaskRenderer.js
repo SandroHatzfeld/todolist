@@ -13,9 +13,7 @@ export default class OpenedTaskRenderer {
 
 		popupWrapperEl.addEventListener("click", (e) => {
 			if (e.currentTarget === e.target) {
-				OpenedTaskRenderer.returnValues()
 				e.currentTarget.remove()
-				Controller.renderToScreen()
 			}
 		})
 
@@ -31,8 +29,8 @@ export default class OpenedTaskRenderer {
 					<select id="taskPriority">
 							<option selected>${this.task.priority.name}</option>
 							${ProjectList.currentProject.priorities.filter((priority) => priority !== this.task.priority).map((priority) => {
-								return `<option value="${priority.name}" style="${priority.color}">${priority.name}</option>`
-							}).join("")}
+			return `<option value="${priority.name}" style="${priority.color}">${priority.name}</option>`
+		}).join("")}
 						</select>
 					</div>
 				<div class="popup-flex-container">
@@ -53,29 +51,38 @@ export default class OpenedTaskRenderer {
 			e.stopPropagation()
 			this.task.state = !this.task.state
 
+			Controller.updateProjectPanel()
 			taskCheckboxEl.classList.toggle("checked")
 		})
 
-	}
-
-	static returnValues() {
 		const taskTitleEl = document.querySelector("#taskTitle")
-		this.task.title = taskTitleEl.innerHTML
+		taskTitleEl.addEventListener("input", (e) => {
+			this.task.title = e.target.innerHTML
+			Controller.updateProjectPanel()
+		})
 
 		const taskPriorityEl = document.querySelector("#taskPriority")
-		// Find the matching priority object
-		const priorityObject = ProjectList.currentProject.priorities.find(p => p.name === taskPriorityEl.value)
-		
-		this.task.priority = priorityObject 
-		
-		if (this.task.dueDate) {
-			const taskDueDateEl = document.querySelector("#taskDueDate")
-			this.task.dueDate = taskDueDateEl.value
-		}
-		
-		const taskDescriptionEl = document.querySelector("#taskDescription")
-		this.task.description = taskDescriptionEl.innerHTML
+		taskPriorityEl.addEventListener("input", (e) => {
+			// Find the matching priority object
+			const priorityObject = ProjectList.currentProject.priorities.find(p => p.name === e.target.value)
 
+			this.task.priority = priorityObject
+			Controller.updateProjectPanel()
+
+		})
+
+		const taskDueDateEl = document.querySelector("#taskDueDate")
+		taskDueDateEl.addEventListener("input", (e) => {
+			this.task.dueDate = e.target.value
+			Controller.updateProjectPanel()
+		})
+
+
+		const taskDescriptionEl = document.querySelector("#taskDescription")
+		taskDescriptionEl.addEventListener("input", (e) => {
+			this.task.description = e.target.innerHTML
+			Controller.updateProjectPanel()
+		})
 
 	}
 }

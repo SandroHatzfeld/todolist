@@ -36,11 +36,9 @@ export default class TaskRenderer {
 		textwrapperEl.appendChild(titleEl)
 
 		if (this.task.dueDate) {
-			const dueDateEl = document.createElement("span")
+			const dueDateEl = document.createElement("p")
 			dueDateEl.classList.add("due-date")
 			dueDateEl.innerHTML = this.task.dueDate
-			const breakEl = document.createElement("br")
-			textwrapperEl.appendChild(breakEl)
 			textwrapperEl.appendChild(dueDateEl)
 		}
 
