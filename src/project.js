@@ -29,4 +29,11 @@ export default class Project {
 	get priorities() {
 		return this.#priorites
 	}	
+
+	updatePriority = (priority, index) => {
+		console.log(this.#tasks.filter(task => task.priority.name === this.#priorites[index].name).map(task => task.priority = priority));
+		
+		this.#tasks.filter(task => task.priority.name === this.#priorites[index].name).map(task => task.priority = priority)
+		this.#priorites[index] = priority
+	}
 }

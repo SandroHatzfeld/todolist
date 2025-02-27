@@ -8,6 +8,7 @@ import ProjectPanelRenderer from './rendering/ProjectPanelRenderer.js'
 import Storage from './storage.js'
 import AddProjectBtnRenderer from './rendering/AddProjectBtnRenderer.js'
 
+
 export default class Controller {
 	static pushNewTask(task) {
 		const currentProject = ProjectList.currentProject
@@ -63,18 +64,24 @@ export default class Controller {
 	}
 	
 	static renderToScreen() {
-		Storage.saveProjects()
-		document.querySelector('#app').innerHTML = ""
-		const asideEl = document.createElement("aside")
-		asideEl.appendChild(ProjectListRenderer.renderProjectsList())
-
-		const mainEl = document.createElement("main")
-		mainEl.appendChild(ProjectPanelRenderer.renderCurrentProject())
-
-		document.querySelector('#app').appendChild(asideEl)
-		document.querySelector('#app').appendChild(mainEl)
+		this.updateProjectList()
+		this.updateProjectPanel()		
 
 		document.querySelector('#app').appendChild(AddTaskBtnRenderer.renderStaticButton())
 		document.querySelector('#app').appendChild(AddProjectBtnRenderer.renderStaticButton())
+	}
+
+	static updateProjectList() {
+		Storage.saveProjects()
+		const asideEl = document.querySelector("aside")
+		asideEl.innerHTML = ""
+		asideEl.appendChild(ProjectListRenderer.renderProjectsList())
+	}
+
+	static updateProjectPanel() {
+		Storage.saveProjects()
+		const mainEl = document.querySelector("main")
+		mainEl.innerHTML = ""
+		mainEl.appendChild(ProjectPanelRenderer.renderCurrentProject())
 	}
 }

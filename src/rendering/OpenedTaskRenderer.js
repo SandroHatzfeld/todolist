@@ -1,3 +1,4 @@
+import Controller from '../controller.js'
 import Project from '../project.js'
 import ProjectList from '../projectList.js'
 
@@ -14,6 +15,7 @@ export default class OpenedTaskRenderer {
 			if (e.currentTarget === e.target) {
 				OpenedTaskRenderer.returnValues()
 				e.currentTarget.remove()
+				Controller.renderToScreen()
 			}
 		})
 
@@ -23,16 +25,23 @@ export default class OpenedTaskRenderer {
 				<div id="taskCheckbox" class="checkbox ${this.task.checked ? 'checked' : ''}" ></div>
 				<h1 class="popup-input-editable" id="taskTitle" contenteditable="true">${this.task.title}</h1>
 			</div>
-				<select id="taskPriority">
-						<option selected>${this.task.priority.name}</option>
-	
-						${ProjectList.currentProject.priorities.filter((priority) => priority !== this.task.priority).map((priority) => {
-							return `<option value="${priority.name}" style="${priority.color}">${priority.name}</option>`
-						}).join("")}
-					</select>
-				${this.task.dueDate ? `<input id="taskDueDate" type="date" value="${this.task.dueDate}">` : ''}
-				<div class="popup-input-editable" id="taskDescription" contenteditable="true">${this.task.description ? this.task.description : ''}</div>			
-			`
+			<div>
+				<div class="popup-flex-container" >
+					<label for="taskPriority">Priority:</label>
+					<select id="taskPriority">
+							<option selected>${this.task.priority.name}</option>
+							${ProjectList.currentProject.priorities.filter((priority) => priority !== this.task.priority).map((priority) => {
+								return `<option value="${priority.name}" style="${priority.color}">${priority.name}</option>`
+							}).join("")}
+						</select>
+					</div>
+				<div class="popup-flex-container">
+						<label for="taskDueDate">Due Date:</label>
+					<input id="taskDueDate" type="date" value="${this.task.dueDate ? this.task.dueDate : ''}">
+				</div>
+			</div>
+			<div class="popup-input-editable" id="taskDescription" contenteditable="true">${this.task.description ? this.task.description : ''}</div>			
+		`
 
 		popupWrapperEl.appendChild(popupFormEl)
 		document.querySelector("body").appendChild(popupWrapperEl)
@@ -51,20 +60,22 @@ export default class OpenedTaskRenderer {
 
 	static returnValues() {
 		const taskTitleEl = document.querySelector("#taskTitle")
+		this.task.title = taskTitleEl.innerHTML
+
 		const taskPriorityEl = document.querySelector("#taskPriority")
+		// Find the matching priority object
+		const priorityObject = ProjectList.currentProject.priorities.find(p => p.name === taskPriorityEl.value)
+		
+		this.task.priority = priorityObject 
+		
 		if (this.task.dueDate) {
 			const taskDueDateEl = document.querySelector("#taskDueDate")
 			this.task.dueDate = taskDueDateEl.value
 		}
+		
 		const taskDescriptionEl = document.querySelector("#taskDescription")
-
-		this.task.title = taskTitleEl.innerHTML
-
-		// Find the matching priority object
-		const priorityObject = ProjectList.currentProject.priorities.find(p => p.name === taskPriorityEl.value)
-
-		this.task.priority = priorityObject 
-
 		this.task.description = taskDescriptionEl.innerHTML
+
+
 	}
 }

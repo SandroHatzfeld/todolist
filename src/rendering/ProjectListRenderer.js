@@ -13,7 +13,7 @@ export default class ProjectListRenderer {
 		projectItemsListEl.id = "project-list"
 
 		this.#projects.forEach((project, index) => {
-			const projectItemEl = document.createElement("span")
+			const projectItemEl = document.createElement("p")
 			projectItemEl.classList.add("project-item")
 
 			projectItemEl.addEventListener("click", (e) => {
@@ -23,7 +23,7 @@ export default class ProjectListRenderer {
 			})
 
 			projectItemEl.dataset.projectIndex = index
-			projectItemEl.innerHTML = project.title
+			projectItemEl.innerHTML = `<span>${project.icon}</span> ${project.title}`
 			projectItemsListEl.appendChild(projectItemEl)
 		})
 		return projectItemsListEl

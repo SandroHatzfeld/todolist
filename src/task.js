@@ -17,5 +17,4 @@ export default class Task {
 	get state() {
 		return this.checked
 	}
-
 }
