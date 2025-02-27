@@ -73,9 +73,8 @@ export default class ProjectPanelRenderer {
 			const priorityItemsEl = document.createElement("div")
 			priorityItemsEl.classList.add("priority-items")
 
-			const taskInPriorityEl = this.#project.tasks.filter((task) => {
-				return task.priority.name === priority.name
-			})
+			const taskInPriorityEl = this.#project.tasks.filter((task) => task.priority.name === priority.name)
+			
 			taskInPriorityEl.forEach((taskData) => {
 				const task = new TaskRenderer(taskData)
 				
