@@ -1,5 +1,6 @@
 import Controller from '../controller.js'
 import ProjectList from '../projectList.js'
+import EmojiRenderer from './emojiRenderer.js'
 import TaskRenderer from './TaskRenderer.js'
 
 export default class ProjectPanelRenderer {
@@ -14,25 +15,20 @@ export default class ProjectPanelRenderer {
 		const titleContainerEl = document.createElement("div")
 		titleContainerEl.classList.add("title-container")
 
-		const projectIconEl = document.createElement("span")
-		projectIconEl.contentEditable = true
-		projectIconEl.innerHTML = this.#project.icon
+		const projectIconEl = new EmojiRenderer().emojiDisplay(this.#project)
 		projectIconEl.classList.add("project-icon")
-		projectIconEl.addEventListener("focusout", (e) => {
-			ProjectList.currentProject.icon = e.target.innerHTML
-			Controller.updateProjectList()
-		})
+		
 		
 		const projectHeadlineEl = document.createElement("h1")
 		projectHeadlineEl.contentEditable = true
 		projectHeadlineEl.innerHTML = this.#project.title
 		projectHeadlineEl.addEventListener("focusout", (e) => {		
-			
 			ProjectList.currentProject.title = e.target.innerHTML
 			Controller.updateProjectList()
 		})
 		
 		titleContainerEl.appendChild(projectIconEl)
+
 		titleContainerEl.appendChild(projectHeadlineEl)
 		
 		const projectDescriptionEl = document.createElement("p")

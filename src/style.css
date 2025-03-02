@@ -35,7 +35,7 @@ aside {
   width: var(--sidebar-width);
   height: 100%;
   background-color: #666666;
-  z-index: 9 9;
+  z-index: 99;
 }
 
 #project-list {
@@ -68,8 +68,33 @@ main h1 {
   gap: 1rem;
 }
 
+.project-icon,#newProjectIcon {
+  aspect-ratio: 1 / 1;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+
+}
 .project-icon {
   font-size: 2rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0.25rem;
+}
+
+#newProjectIcon {
+  height: 1.5rem;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  background-color: #2B2A33;
+}
+.emoji-wrapper {
+  position: absolute;
+  z-index: 10;
+}
+.hidden {
+  display: none;
 }
 .title-container {
   display: flex;
@@ -206,8 +231,12 @@ main h1 {
 .newProjectPriorityContainer {
   display: grid;
 }
+
 input[type="submit"],input[type="select"] {
-  padding: 0.25rem 0.75rem;
+  padding: 0 0.5rem;
   margin-top: 0.5rem;
   cursor: pointer;
+}
+input {
+  height: 1.5rem;
 }
