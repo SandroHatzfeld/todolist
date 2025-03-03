@@ -25,10 +25,10 @@ export default class Controller {
 		
 		// If no projects exist, create default ones
 		if (ProjectList.projects.length === 0) {
-			const project1 = new Project("Testproject", "This is my first project", "😊")
-			const project2 = new Project("Second Project", "This is my second project", "❤️")
-			const project1Priorities = [ { name: "Asap", color: "#e26246" }, { name: "Medium", color: "#cdcd49" }, { name: "Soon", color: "#3db63d" }, { name: "None", color: "#d4d4d4" } ]
-			const project2Priorities = [ { name: "Soon", color: "#3db63d" }, { name: "None", color: "#d4d4d4" } ]
+			const project1 = new Project("Main Project", "This is my main project page", "👌")
+			const project2 = new Project("Private Project", "This is private", "🔒")
+			const project1Priorities = [ { name: "Asap", color: "#e93636" }, { name: "Medium", color: "#cdcd49" }, { name: "Soon", color: "#30d338" }, { name: "None", color: "#bababa" } ]
+			const project2Priorities = [ { name: "Soon", color: "#30d338" }, { name: "None", color: "#bababa" } ]
 
 			project1Priorities.forEach(priority => {
 				project1.priorities = priority
@@ -38,15 +38,15 @@ export default class Controller {
 			})
 
 
-			const task1 = new Task("First Task", "Finish this project", project1.priorities[ 0 ])
-			const task2 = new Task("Second Task", "Finish this project", project1.priorities[ 1 ])
-			const task3 = new Task("Useless Task", "Finish this project", project1.priorities[ 2 ])
-			const task4 = new Task("fourth Task", "Finish this project", project1.priorities[ 2 ])
+			const task1 = new Task("First Task", "Finish the Odin Project", project1.priorities[ 0 ])
+			const task2 = new Task("Second Task", "Get stuff done my friends", project1.priorities[ 1 ])
+			const task3 = new Task("Finish dishes", "Do the damn dishes!", project1.priorities[ 2 ])
+			const task4 = new Task("Feed fishes", "Blub blub", project1.priorities[ 2 ])
 
-			const task5 = new Task("fourth Task", "Finish this project", project2.priorities[ 1 ])
+			const task5 = new Task("Eat cake", "But the cake is a lie!", project2.priorities[ 1 ])
 
 			task2.state = true
-			task3.dueDate = new Date(2025, 2, 21).toLocaleString()
+			task3.dueDate = new Date(2025, 3, 21).toLocaleString()
 
 			project1.tasks = task1
 			project1.tasks = task2
