@@ -24,13 +24,13 @@ Coloris({
 		'#3a14c3',
 		'#1d9acf',
 		'#04cb85',
-		'#656567',
+		'#bababa',
 		'#393b3e'
 	]
 })
 export default class AddProjectFormRenderer {
 	static tempProject = {
-		icon: ""
+		icon: "📒"
 	}
 
 	static renderInputForm() {
@@ -148,7 +148,7 @@ export default class AddProjectFormRenderer {
 		const inputColor = document.createElement("input")
 		inputColor.id = "newProjectPriorityColor" + index
 		inputColor.type = "text"
-		inputColor.value = "#ffffff"
+		inputColor.value = "#bababa"
 		inputColor.classList.add("newPriorityColor")
 		inputColor.classList.add("coloris")
 

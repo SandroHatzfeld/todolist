@@ -4,6 +4,7 @@ import Task from './task.js'
 
 export default class Storage {
 	static saveProjects() {
+		localStorage.clear()
 		const projectlist = ProjectList.projects
 
 		projectlist.forEach((project, projectIndex) => {
