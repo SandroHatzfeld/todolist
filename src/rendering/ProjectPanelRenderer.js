@@ -1,3 +1,29 @@
+import "../../node_modules/@melloware/coloris/dist/coloris.css"
+import Coloris from "../../node_modules/@melloware/coloris"
+Coloris.init()
+Coloris({
+	parent: '.priority-color',
+	el: '.coloris',
+	theme: 'polaroid',
+	themeMode: 'dark',
+	alpha: false,
+	format: 'hex',
+	swatchesOnly:true,
+	swatches: [
+		'#1f9a4a',
+		'#30d338',
+		'#cdcd49',
+		'#e93636',
+		'#d93e67',
+		'#7925d3',
+		'#023e8a',
+		'#3a14c3',
+		'#1d9acf',
+		'#04cb85',
+		'#656567',
+		'#393b3e'
+	]
+})
 import Controller from '../controller.js'
 import ProjectList from '../projectList.js'
 import EmojiRenderer from './emojiRenderer.js'
@@ -18,7 +44,6 @@ export default class ProjectPanelRenderer {
 		const projectIconEl = new EmojiRenderer().emojiDisplay(this.#project)
 		projectIconEl.classList.add("project-icon")
 		
-		
 		const projectHeadlineEl = document.createElement("h1")
 		projectHeadlineEl.contentEditable = true
 		projectHeadlineEl.innerHTML = this.#project.title
@@ -28,7 +53,6 @@ export default class ProjectPanelRenderer {
 		})
 		
 		titleContainerEl.appendChild(projectIconEl)
-
 		titleContainerEl.appendChild(projectHeadlineEl)
 		
 		const projectDescriptionEl = document.createElement("p")
@@ -52,10 +76,15 @@ export default class ProjectPanelRenderer {
 		const prioritySortingEl = document.createElement("div")
 		prioritySortingEl.id = "priority-sorting"
 
+		
+		
 		this.#project.priorities.forEach((priority,index) => {
 			const priorityColumnEl = document.createElement("div")
 			priorityColumnEl.classList.add("priority")
 			priorityColumnEl.style.backgroundColor = priority.color
+
+			const priorityHeader = document.createElement("div")
+			priorityHeader.classList.add("priority-header")
 
 			const priorityHeadlineEl = document.createElement("h2")
 			priorityHeadlineEl.innerHTML = priority.name
@@ -65,6 +94,19 @@ export default class ProjectPanelRenderer {
 				ProjectList.currentProject.updatePriority(changedPriority,index)
 				Controller.renderToScreen()
 			})
+
+			const priorityColorEl = document.createElement("input")
+			priorityColorEl.classList.add("priority-color")
+			priorityColorEl.classList.add("coloris")
+
+			priorityColorEl.addEventListener('change', event => {
+				const changedPriority = {name: priority.name, color: event.target.value}
+				ProjectList.currentProject.updatePriority(changedPriority,index)
+				Controller.renderToScreen()
+			})
+
+			priorityHeader.appendChild(priorityHeadlineEl)
+			priorityHeader.appendChild(priorityColorEl)
 
 			const priorityItemsEl = document.createElement("div")
 			priorityItemsEl.classList.add("priority-items")
@@ -78,7 +120,7 @@ export default class ProjectPanelRenderer {
 				priorityItemsEl.appendChild(taskEl)
 			})
 
-			priorityColumnEl.appendChild(priorityHeadlineEl)
+			priorityColumnEl.appendChild(priorityHeader)
 			priorityColumnEl.appendChild(priorityItemsEl)
 			prioritySortingEl.appendChild(priorityColumnEl)
 		})

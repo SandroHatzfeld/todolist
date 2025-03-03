@@ -25,4 +25,8 @@ export default class ProjectList {
 	static get currentProject() {
 		return this.#projects[ this.#currentProjectIndex ]
 	}
+
+	static removeProjectItem(index) {
+		this.#projects.splice(index)
+	}
 }

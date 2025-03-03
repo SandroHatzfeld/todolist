@@ -16,7 +16,7 @@ Coloris({
 	swatches: [
 		'#1f9a4a',
 		'#30d338',
-		'#f1fd46',
+		'#cdcd49',
 		'#e93636',
 		'#d93e67',
 		'#7925d3',
@@ -24,8 +24,8 @@ Coloris({
 		'#3a14c3',
 		'#1d9acf',
 		'#04cb85',
-		'#a4a5ad',
-		'#212224'
+		'#656567',
+		'#393b3e'
 	]
 })
 export default class AddProjectFormRenderer {

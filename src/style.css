@@ -49,8 +49,18 @@ aside {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0.25rem;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.project-item-remove {
+  width: 1rem;
+  height: 1rem;
+}
+.project-item:hover .project-item-remove {
+  background-image: url("./assets/images/closeBtn.svg");
+}
 main {
   padding: 2rem;
   margin-left: var(--sidebar-width);
@@ -68,7 +78,7 @@ main h1 {
   gap: 1rem;
 }
 
-.project-icon,#newProjectIcon {
+.project-icon, #newProjectIcon {
   aspect-ratio: 1 / 1;
   text-align: center;
   cursor: pointer;
@@ -112,9 +122,26 @@ main h1 {
   min-width: 300px;
   border-radius: 0.25rem;
 }
-.priority h2 {
+.priority-header {
   margin-bottom: 1rem;
+  display: flex;
   border-bottom: 1px var(--font-color) solid;
+}
+.priority-header h2 {
+  width: 100%;
+}
+.priority-color {
+  height: 1.75rem;
+  width: 1.75rem;
+  cursor: pointer;
+  user-select: none;
+  color: transparent;
+  background-color: transparent;
+  background-image: url("./assets/images/brushPen.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  outline: none;
 }
 .priority-items {
   display: grid;
