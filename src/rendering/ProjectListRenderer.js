@@ -1,6 +1,5 @@
-import Controller from '../controller.js';
-import ProjectList from '../projectList.js';
-import ProjectPanelRenderer from './ProjectPanelRenderer.js'
+import Controller from '../controller.js'
+import ProjectList from '../projectList.js'
 
 export default class ProjectListRenderer {
 	static #projects = ProjectList.projects
@@ -28,8 +27,10 @@ export default class ProjectListRenderer {
 			projectRemoveBtn.classList.add("project-item-remove")
 
 			projectRemoveBtn.addEventListener("click", () => {
+				ProjectList.currentProject = 0
 				ProjectList.removeProjectItem(index)
 				Controller.updateProjectList()
+				Controller.updateProjectPanel()
 			})
 
 			projectItemEl.appendChild(projectRemoveBtn)

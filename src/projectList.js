@@ -27,6 +27,6 @@ export default class ProjectList {
 	}
 
 	static removeProjectItem(index) {
-		this.#projects.splice(index)
+		this.#projects.splice(index, 1)
 	}
 }
