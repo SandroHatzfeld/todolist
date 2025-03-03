@@ -175,7 +175,7 @@ main h1 {
 .addProjectBtn {
   right: auto;
   left: 1rem;
-  z-index: 999;
+  z-index: 500;
 }
 
 .popup-wrapper, .open-task-wrapper{
@@ -185,7 +185,7 @@ main h1 {
   place-items: center;
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  z-index: 99999;
+  z-index: 999;
 }
 .popup-wrapper form {
   padding: 1rem;
@@ -197,6 +197,7 @@ main h1 {
 .popup-input-container {
   display: grid;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 .popup-flex-container {
   display: flex;
@@ -231,7 +232,12 @@ main h1 {
 .newProjectPriorityContainer {
   display: grid;
 }
-
+.newPriorityColor {
+  border: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: #ffffff;
+}
 input[type="submit"],input[type="select"] {
   padding: 0 0.5rem;
   margin-top: 0.5rem;

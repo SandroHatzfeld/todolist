@@ -2,7 +2,32 @@ import Controller from '../controller.js'
 import Project from '../project.js'
 import ProjectList from '../projectList.js'
 import EmojiRenderer from './emojiRenderer.js'
-
+import "../../node_modules/@melloware/coloris/dist/coloris.css"
+import Coloris from "../../node_modules/@melloware/coloris"
+Coloris.init()
+Coloris({
+	parent: '.popup-input-container',
+	el: '.coloris',
+	theme: 'polaroid',
+	themeMode: 'dark',
+	alpha: false,
+	format: 'hex',
+	swatchesOnly:true,
+	swatches: [
+		'#1f9a4a',
+		'#30d338',
+		'#f1fd46',
+		'#e93636',
+		'#d93e67',
+		'#7925d3',
+		'#023e8a',
+		'#3a14c3',
+		'#1d9acf',
+		'#04cb85',
+		'#a4a5ad',
+		'#212224'
+	]
+})
 export default class AddProjectFormRenderer {
 	static tempProject = {
 		icon: ""
@@ -13,7 +38,7 @@ export default class AddProjectFormRenderer {
 		popupWrapperEl.classList.add("popup-wrapper")
 
 		popupWrapperEl.addEventListener("click", (e) => {
-			if(e.currentTarget === e.target) {
+			if (e.currentTarget === e.target) {
 				e.currentTarget.remove()
 			}
 		})
@@ -22,7 +47,7 @@ export default class AddProjectFormRenderer {
 		popupFormEl.innerHTML = `
 			<h1>New Project</h1>
 			<div class="popup-flex-container">
-				<div class="popup-input-container" >
+				<div class="popup-input-container" style="width:auto">
 					<label >Icon</label>
 					<div id="newProjectIconContainer"></div>
 				</div>
@@ -38,7 +63,7 @@ export default class AddProjectFormRenderer {
 			</div>
 			<div class="popup-input-container" id="newProjectPriorityWrapper"></div>
 		`
-	
+
 		const addNewProjectPriorityBtn = document.createElement("input")
 		addNewProjectPriorityBtn.classList.add("popup-flex-container")
 		addNewProjectPriorityBtn.value = "Add a Priority"
@@ -62,7 +87,7 @@ export default class AddProjectFormRenderer {
 				return
 			}
 			const newProjectName = document.querySelector("#newProjectName").value
-			const newProjectIcon = document.querySelector("#newProjectIcon").value || ""
+			const newProjectIcon = this.tempProject.icon
 			const newProjectDescription = document.querySelector("#newProjectDescription").value || ""
 
 			const newProject = new Project(newProjectName, newProjectDescription, newProjectIcon)
@@ -86,9 +111,9 @@ export default class AddProjectFormRenderer {
 		popupFormEl.appendChild(submitNewProject)
 		popupWrapperEl.appendChild(popupFormEl)
 		document.querySelector("body").appendChild(popupWrapperEl)
-		
-		AddProjectFormRenderer.renderNewProjectIcon()
 
+
+		AddProjectFormRenderer.renderNewProjectIcon()
 		AddProjectFormRenderer.addNewPriorityInput()
 	}
 
@@ -111,21 +136,25 @@ export default class AddProjectFormRenderer {
 		inputName.id = "newProjectPriorityName" + index
 		inputName.classList.add("newPriorityName")
 		inputName.required = true
-		
+
 		const inputColorContainer = document.createElement("div")
 		inputColorContainer.classList.add("popup-input-container")
-		
-		
+
+
 		const inputColorLabel = document.createElement("label")
 		inputColorLabel.innerHTML = "Color*"
 		inputColorLabel.for = "newProjectPriorityColor" + index
-		
+
 		const inputColor = document.createElement("input")
-		inputColor.type = "color"
-		inputColor.value = "#ffffff"
 		inputColor.id = "newProjectPriorityColor" + index
+		inputColor.type = "text"
+		inputColor.value = "#ffffff"
 		inputColor.classList.add("newPriorityColor")
-		inputColor.required = true
+		inputColor.classList.add("coloris")
+
+		document.addEventListener('coloris:pick', event => {
+			event.detail.currentEl.style.backgroundColor = event.detail.color
+		})
 
 		inputNameContainer.appendChild(inputNameLabel)
 		inputNameContainer.appendChild(inputName)
@@ -141,7 +170,7 @@ export default class AddProjectFormRenderer {
 	static renderNewProjectIcon() {
 		const addNewProjectIconBtn = new EmojiRenderer().emojiDisplay(this.tempProject)
 		addNewProjectIconBtn.id = "newProjectIcon"
-		
+
 		const addNewProjectIconContainer = document.querySelector("#newProjectIconContainer")
 		addNewProjectIconContainer.innerHTML = ""
 		addNewProjectIconContainer.appendChild(addNewProjectIconBtn)
