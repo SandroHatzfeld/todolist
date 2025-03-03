@@ -1,4 +1,4 @@
-import Picker from "../../node_modules/emoji-picker-element/picker.js"
+import { Picker } from 'emoji-picker-element';
 import Controller from '../controller.js'
 import AddProjectFormRenderer from './AddProjectFormRenderer.js'
 

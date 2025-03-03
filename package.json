@@ -12,6 +12,7 @@
     "vite": "^6.0.5"
   },
   "dependencies": {
-    "@melloware/coloris": "^0.24.0"
+    "@melloware/coloris": "^0.24.0",
+    "emoji-picker-element": "^1.26.1"
   }
 }
